@@ -1,0 +1,27 @@
+if exists("b:current_syntax")
+  finish
+endif
+
+" Keywords
+syntax keyword arcKeyword IF THEN ELSE WHILE END FN VAR RETURN IMPORT
+
+" Built-in functions
+syntax keyword arcBuiltin print sqrt log ln exp
+
+" Numbers
+syntax match arcNumber /\v\d+(\.\d+)?/
+
+" Strings
+syntax region arcString start=/"/ end=/"/
+
+" Operators
+syntax match arcOperator /[+\-*/^=<>!]+/
+
+" Highlight linking
+highlight link arcKeyword Keyword
+highlight link arcBuiltin Function
+highlight link arcNumber Number
+highlight link arcString String
+highlight link arcOperator Operator
+
+let b:current_syntax = "arc"
