@@ -3,7 +3,7 @@ if exists("b:current_syntax")
 endif
 
 " Keywords
-syntax keyword arcKeyword IF THEN ELSE WHILE END FN VAR RETURN IMPORT
+syntax keyword arcKeyword IF THEN ELIF ELSE WHILE END FN VAR RETURN IMPORT
 
 " Built-in functions
 syntax keyword arcBuiltin print sqrt log ln exp
