@@ -5,8 +5,8 @@ endif
 " Keywords
 syntax keyword arcKeyword IF THEN ELIF ELSE WHILE END FN VAR RETURN IMPORT
 
-" Built-in functions
-syntax keyword arcBuiltin print sqrt log ln exp
+" Functions 
+syntax match arcFunction /\v[a-zA-Z_][a-zA-Z0-9_]*\ze\s*\(/
 
 " Numbers
 syntax match arcNumber /\v\d+(\.\d+)?/
@@ -23,5 +23,6 @@ highlight link arcBuiltin Function
 highlight link arcNumber Number
 highlight link arcString String
 highlight link arcOperator Operator
+highlight link arcFunction Function
 
 let b:current_syntax = "arc"
