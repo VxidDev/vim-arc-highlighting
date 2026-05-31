@@ -129,17 +129,6 @@ This installs:
 
 ---
 
-## Required Emacs setup
-
-Add this to your `~/.emacs.d/init.el`:
-
-```elisp
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-(require 'arc-mode)
-```
-
----
-
 # Emacs file roles
 
 * `arc-mode.el` -> major mode (syntax highlighting + indentation + settings)
