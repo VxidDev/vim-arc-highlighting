@@ -1,4 +1,3 @@
-```md
 # Arc Syntax Highlighting
 
 Syntax highlighting for the **Arc programming language** supporting:
