@@ -1,33 +1,48 @@
-# vim-arc-highlighting
+```md
+# Arc Syntax Highlighting
 
-Neovim/Vim syntax highlighting for the Arc programming language.
+Syntax highlighting for the **Arc programming language** supporting:
+
+- Vim
+- Neovim
+- Emacs (major mode)
 
 ---
 
-## Installation
+# Repository Structure
 
-This project supports:
-
-* Vim (pack-based installation)
-* Neovim (pack-based installation)
-* Optional Neovim plugin loader (lazy.nvim-style plugin file)
-
-### Install everything
-
-```bash
-make install
 ```
 
+vim/
+├── ftdetect/
+├── ftplugin/
+├── syntax/
+└── makefile
+
+emacs/
+├── arc-mode.el
+└── makefile
+
+````
+
 ---
 
-## Manual install targets
+# Vim / Neovim Installation
 
-### Vim
+This version uses Vim/Neovim native `pack/` directories.
 
-Installs Arc syntax into Vim’s native package system:
+## Install everything
 
 ```bash
-make install-vim
+make -C vim install
+````
+
+---
+
+## Install Vim only
+
+```bash
+make -C vim install-vim
 ```
 
 Installs to:
@@ -38,12 +53,10 @@ Installs to:
 
 ---
 
-### Neovim (recommended)
-
-Installs Arc syntax using Neovim’s built-in package system:
+## Install Neovim only
 
 ```bash
-make install-nvim
+make -C vim install-nvim
 ```
 
 Installs to:
@@ -54,12 +67,10 @@ Installs to:
 
 ---
 
-### Optional: Neovim plugin config (lazy.nvim style)
-
-This creates a plugin entry so Neovim can load the project as a local plugin:
+## Optional Neovim plugin config
 
 ```bash
-make install-plugins
+make -C vim install-plugins
 ```
 
 Creates:
@@ -68,7 +79,7 @@ Creates:
 ~/.config/nvim/lua/plugins/arc.lua
 ```
 
-Example generated file:
+Example:
 
 ```lua
 return {
@@ -78,73 +89,135 @@ return {
 
 ---
 
-## Uninstall
-
-Remove installed syntax files:
+## Uninstall (Vim/Neovim)
 
 ```bash
-make uninstall
+make -C vim uninstall
 ```
 
 Or separately:
 
 ```bash
-make uninstall-vim
-make uninstall-nvim
+make -C vim uninstall-vim
+make -C vim uninstall-nvim
 ```
 
 ---
 
-## Clean
+# Vim file roles
+
+* `syntax/arc.vim` -> syntax highlighting rules
+* `ftdetect/arc.vim` -> filetype detection for `.arc`
+* `ftplugin/arc.vim` -> indentation + file settings
+
+---
+
+# Emacs Installation
+
+Emacs support is a single major mode file.
+
+## Install Emacs mode
 
 ```bash
-make clean
+make -C emacs install
 ```
 
-Currently does not remove installed packages (only placeholder for future build artifacts).
+This installs:
+
+```
+~/.emacs.d/lisp/arc-mode.el
+```
 
 ---
 
-## File structure
+## Required Emacs setup
 
-```
-ftdetect/
-ftplugin/
-syntax/
-```
+Add this to your `~/.emacs.d/init.el`:
 
-* `syntax/arc.vim` → syntax highlighting rules
-* `ftdetect/arc.vim` → filetype detection
-* `ftplugin/arc.vim` → optional filetype config hooks
+```elisp
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'arc-mode)
+```
 
 ---
 
-## Notes
+# Emacs file roles
 
-* Vim/Neovim automatically load plugins installed under `pack/*/start/`
-* No additional configuration is required after `make install-vim` or `make install-nvim`
-* For Neovim plugin system integration, use `make install-plugins`
+* `arc-mode.el` -> major mode (syntax highlighting + indentation + settings)
 
 ---
 
-## Troubleshooting
+# Features
+
+## Vim / Neovim
+
+* keyword highlighting
+* function detection
+* string + number highlighting
+* operator highlighting
+* filetype detection for `.arc`
+
+## Emacs
+
+* major mode (`arc-mode`)
+* font-lock syntax highlighting
+* 2-space indentation
+* `.arc` file auto-detection
+
+---
+
+# Troubleshooting
+
+## Vim / Neovim
 
 If syntax does not load:
 
-1. Ensure file ends in `.arc`
-2. Restart Vim/Neovim
-3. Run:
-
 ```vim
 :syntax on
-```
-
-4. Check filetype:
-
-```vim
 :set filetype?
 ```
 
-## License 
+Ensure file ends in `.arc`.
+
+Restart editor after install.
+
+---
+
+## Emacs
+
+If mode does not activate:
+
+1. Verify installation:
+
+```elisp
+M-x describe-function RET arc-mode
+```
+
+2. Check file association:
+
+```elisp
+M-x describe-variable RET auto-mode-alist
+```
+
+3. Manually enable:
+
+```elisp
+M-x arc-mode
+```
+
+---
+
+# Install everything
+
+From repo root:
+
+```bash
+make -C vim install
+make -C emacs install
+```
+
+---
+
+# License
 
 MIT License
