@@ -3,7 +3,7 @@ if exists("b:current_syntax")
 endif
 
 " Keywords
-syntax keyword arcKeyword IF THEN ELIF ELSE WHILE END FN VAR RETURN IMPORT
+syntax keyword arcKeyword IF THEN ELIF ELSE WHILE END FN VAR RETURN IMPORT TRY CATCH 
 
 " Functions 
 syntax match arcFunction /\v[a-zA-Z_][a-zA-Z0-9_]*\ze\s*\(/
