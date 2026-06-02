@@ -11,26 +11,29 @@
 (add-to-list 'auto-mode-alist '("\\.arc\\'" . arc-mode))
 
 (defconst arc-font-lock-keywords
-  (list
-   ;; Keywords
-   (regexp-opt
-    '("IF" "THEN" "ELIF" "ELSE" "WHILE" "END" "FN"
-      "VAR" "RETURN" "IMPORT" "TRY" "CATCH")
-    'words)
+  `(
+    ;; Keywords
+    (,(regexp-opt
+       '("IF" "THEN" "ELIF" "ELSE" "WHILE" "FOR" "IN"
+         "END" "FN" "VAR" "RETURN" "IMPORT"
+         "TRY" "CATCH" "BREAK" "CONTINUE")
+       'words)
+     . font-lock-keyword-face)
 
-   ;; Functions: name followed by (
-   '("\\b[a-zA-Z_][a-zA-Z0-9_]*\\s-*("
-     . font-lock-function-name-face)
+    ;; Comments
+    ("#.*$" . font-lock-comment-face)
 
-   ;; Numbers (int + float)
-   '("\\b[0-9]+\\(\\.[0-9]+\\)?\\b"
+    ;; Functions
+    ("\\b\\([a-zA-Z_][a-zA-Z0-9_]*\\)\\s-*("
+     1 font-lock-function-name-face)
+
+    ;; Numbers
+    ("\\b[0-9]+\\(\\.[0-9]+\\)?\\b"
      . font-lock-constant-face)
 
-   ;; Strings
-   '("\"\\([^\"\\\\]\\|\\\\.\\)*\""
-     . font-lock-string-face)
-
-   ))
+    ;; Strings
+    ("\"\\(?:[^\"\\\\]\\|\\\\.\\)*\""
+     . font-lock-string-face)))
 
 ;;;###autoload
 (define-derived-mode arc-mode prog-mode "Arc"
